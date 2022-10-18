@@ -3,12 +3,12 @@ import java.time.LocalDate;
 import java.util.regex.*;
 
 public class User {
-    private String email;
-    private String password;
+    private String email, password, name;
     private LocalDate creationDate;
     private boolean loginStatus;
 
-    public User() { //
+
+    public User() { // default constructor
         loginStatus = false;
         creationDate = LocalDate.now();
     }
@@ -21,52 +21,64 @@ public class User {
         return true; // not implemented yet
     }
 
+    public String getName() {
+        return(name);
+    }
+
+    public boolean setName(String name) {
+        if(name.equals("")) {
+            return false;
+        } else {
+            this.name = name;
+            return true;
+        }
+    }
+
     public String getEmail() { // returns user Email
         return(email);
+    }
+
+    public boolean setEmail(String email) { // sets user Email
+        String regex = "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$"; // regex for email validation from https://howtodoinjava.com/java/regex/java-regex-validate-email-address/
+
+        Pattern pattern = Pattern.compile(regex);
+
+        Matcher matcher = pattern.matcher(email);
+
+        if(matcher.matches()) { // returns true if email is valid, false if not
+            this.email = email;
+            return(true);
+        } else {
+            return(false);
+        }
     }
 
     public String getPassword() { // returns user Password
         return(password);
     }
 
-    public boolean setEmail(String newEmail) { // sets user Email
-        String regex = "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$"; // regex for email validation from https://howtodoinjava.com/java/regex/java-regex-validate-email-address/
-
-        Pattern pattern = Pattern.compile(regex);
-
-        Matcher matcher = pattern.matcher(newEmail);
-
-        if(matcher.matches()) { // returns true if email is valid, false if not
-            email = newEmail;
-            return(true);
-        } else {
-            return(false);
-        }
-
-
-    }
-
-    public boolean setPassword(String newPassword) { // sets user Email
+    public boolean setPassword(String password) { // sets user Email
         String regex = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{8,20}$"; // regex for password validation from https://mkyong.com/regular-expressions/how-to-validate-password-with-regular-expression/
 
         Pattern pattern = Pattern.compile(regex);
 
-        Matcher matcher = pattern.matcher(newPassword);
+        Matcher matcher = pattern.matcher(password);
 
-        if(matcher.matches()) { // returns true if password is valid, false if not
-            password = newPassword;
-            return(true);
+        if (matcher.matches()) { // returns true if password is valid, false if not
+            this.password = password;
+            return (true);
         } else {
-            return(false);
+            return (false);
         }
+
     }
 
     public LocalDate getCreationDate() { // gets user creationDate
         return(creationDate);
     }
 
-    public boolean setCreationDate(LocalDate newCreationDate) { // sets user creationDate
-        creationDate = newCreationDate;
+    public boolean setCreationDate(LocalDate creationDate) { // sets user creationDate
+        this.creationDate = creationDate;
         return true;
     }
 
