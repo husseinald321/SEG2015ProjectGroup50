@@ -1,12 +1,10 @@
 package com.example.mytable;
 
-import java.time.LocalDate;
-
 public class Client extends User{
     private Address clientAddress;
-    private int cardNumber, cardCVC;
-    private String cardHolderName;
-    private LocalDate cardExpirationDate;
+    private int cardCVC;
+    private long cardNumber;
+    private String cardHolderName, cardExpirationDateMonth, cardExpirationDateYear, cardExpirationDate;
 
     public Client() {
 
@@ -19,35 +17,70 @@ public class Client extends User{
         this.clientAddress = clientAddress;
     }
 
-    public int getCardNumber() {
+    public long getCardNumber() {
         return cardNumber;
     }
 
-    public void setCardNumber(int cardNumber) {
-        this.cardNumber = cardNumber;
+    public boolean setCardNumber(String cardNumber) {
+        if(cardNumber.length() != 16) {
+            return(false);
+        } else {
+            this.cardNumber = Long.parseLong(cardNumber);
+            return(true);
+        }
     }
 
     public int getCardCVC() {
         return cardCVC;
     }
 
-    public void setCardCVC(int cardCVC) {
-        this.cardCVC = cardCVC;
+    public boolean setCardCVC(String cardCVC) {
+        if(cardCVC.length() != 3) {
+            return(false);
+        } else {
+            this.cardCVC = Integer.parseInt(cardCVC);
+            return(true);
+        }
     }
 
     public String getCardHolderName() {
         return cardHolderName;
     }
 
-    public void setCardHolderName(String cardHolderName) {
-        this.cardHolderName = cardHolderName;
+    public boolean setCardHolderName(String cardHolderName) {
+        if(cardHolderName.equals("")) {
+            return(false);
+        } else {
+            this.cardHolderName = cardHolderName;
+            return(true);
+        }
+
     }
 
-    public LocalDate getCardExpirationDate() {
-        return cardExpirationDate;
+    public String getCardExpirationDate() {
+        cardExpirationDate = cardExpirationDateMonth + "/" + cardExpirationDateYear;
+        return(cardExpirationDate);
     }
 
-    public void setCardExpirationDate(LocalDate cardExpirationDate) {
-        this.cardExpirationDate = cardExpirationDate;
+    public boolean setCardExpirationMonth(String cardExpirationDateMonth) {
+        if (cardExpirationDateMonth.equals("")) {
+            return(false);
+        } else if(Integer.parseInt(cardExpirationDateMonth) > 12) {
+            return(false);
+        } else {
+            this.cardExpirationDateMonth = cardExpirationDateMonth;
+            return(true);
+        }
+    }
+
+    public boolean setCardExpirationYear(String cardExpirationDateYear) {
+        if (cardExpirationDateYear.equals("")) {
+            return(false);
+        } else if(Integer.parseInt(cardExpirationDateYear) < 22) {
+            return(false);
+        } else {
+            this.cardExpirationDateYear = cardExpirationDateYear;
+            return(true);
+        }
     }
 }

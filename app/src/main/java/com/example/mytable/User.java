@@ -3,7 +3,7 @@ import java.time.LocalDate;
 import java.util.regex.*;
 
 public class User {
-    private String email, password, name;
+    private String email, password, firstName, lastName;
     private LocalDate creationDate;
     private boolean loginStatus;
 
@@ -21,17 +21,38 @@ public class User {
         return true; // not implemented yet
     }
 
-    public String getName() {
-        return(name);
+    public String getFirstName() {
+        return firstName;
     }
 
-    public boolean setName(String name) {
-        if(name.equals("")) {
-            return false;
+    public boolean setFirstName(String firstName) {
+        if(firstName.equals("")) {
+            return(false);
         } else {
-            this.name = name;
-            return true;
+            this.firstName = firstName;
+            return(true);
         }
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public boolean setLastName(String lastName) {
+        if(lastName.equals("")) {
+            return(false);
+        } else {
+            this.lastName = lastName;
+            return(true);
+        }
+    }
+
+    public boolean isLoginStatus() {
+        return loginStatus;
+    }
+
+    public void setLoginStatus(boolean loginStatus) {
+        this.loginStatus = loginStatus;
     }
 
     public String getEmail() { // returns user Email

@@ -9,6 +9,6 @@ public class CookRegisterScreen extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cook_register_screen);
+        setContentView(R.layout.cook_register_screen);
     }
 }
