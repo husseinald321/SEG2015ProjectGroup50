@@ -3,14 +3,12 @@ import java.time.LocalDate;
 import java.util.regex.*;
 
 public class User {
-    private String email, password, firstName, lastName;
-    private LocalDate creationDate;
+    private String email, password, firstName, lastName, userType;
     private boolean loginStatus;
 
 
     public User() { // default constructor
         loginStatus = false;
-        creationDate = LocalDate.now();
     }
 
     public boolean verifyLogin() {
@@ -94,13 +92,12 @@ public class User {
 
     }
 
-    public LocalDate getCreationDate() { // gets user creationDate
-        return(creationDate);
+    public String getUserType(){
+        return userType;
     }
 
-    public boolean setCreationDate(LocalDate creationDate) { // sets user creationDate
-        this.creationDate = creationDate;
-        return true;
+    public void setUserType(String type){
+        this.userType = type;
     }
 
 }

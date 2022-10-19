@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(i);
     }
 
-    public void login() {
+    public void login(View v) {
         Intent i = new Intent(this, LoginScreen.class);
 
         startActivity(i);

@@ -1,5 +1,6 @@
 package com.example.mytable;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -8,18 +9,30 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class CookRegisterScreen extends AppCompatActivity {
 
     Cook cook;
     Address cookAddress;
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference dbRef = database.getReference("users");
+    List<Cook> cooks = new ArrayList<Cook>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +40,30 @@ public class CookRegisterScreen extends AppCompatActivity {
         setContentView(R.layout.cook_register_screen);
         cook = new Cook();
         cookAddress = new Address();
+    }
+
+    public void onStart() {
+        super.onStart();
+        dbRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                //Clearing previously stored list of clients.
+                cooks.clear();
+                for (DataSnapshot postSnapShot : snapshot.getChildren()){
+                    //get each client
+                    Cook cook = postSnapShot.getValue(Cook.class);
+                    //add updated client to list
+                    cooks.add(cook);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                final String TAG = "Couldn't fetch list of cooks";
+                Log.w(TAG, "loadPost:onCancelled", error.toException());
+            }
+        });
+
     }
 
     public void registerComplete(View v) {
@@ -147,11 +184,21 @@ public class CookRegisterScreen extends AppCompatActivity {
         EditText cookUnitNumber = (EditText)findViewById(R.id.cookUnitNumber);
 
         cookAddress.setUnit(cookUnitNumber.getText().toString());
-
+        cookAddress.setPostalCode("ABC 123");
+        cook.setCookAddress(cookAddress);
+        cook.setUserType("Cook");
         if(firstNameValid && lastNameValid && emailValid && passwordValid && passwordsMatch && countryValid && provinceValid && cityValid && streetNameValid && streetNumberValid) {
             System.out.println("All fields valid");
+            postNewCook(cook);
+            Intent i = new Intent(this, MainActivity.class);
+            startActivity(i);
         }
 
+    }
+
+    public void postNewCook(Cook newCook){
+        String userId = dbRef.push().getKey();
+        dbRef.child("cooks").child(userId).setValue(newCook);
     }
 
 

@@ -1,19 +1,33 @@
 package com.example.mytable;
 
-import static java.lang.Integer.parseInt;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.EditText;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class ClientRegisterScreen extends AppCompatActivity {
 
     Client client;
     Address clientAddress;
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference dbRef = database.getReference("users");
+    List<Client> clients = new ArrayList<Client>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +35,30 @@ public class ClientRegisterScreen extends AppCompatActivity {
         setContentView(R.layout.client_register_screen);
         client = new Client();
         clientAddress = new Address();
+    }
+
+    public void onStart() {
+        super.onStart();
+        dbRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                //Clearing previously stored list of clients.
+                clients.clear();
+                for (DataSnapshot postSnapShot : snapshot.getChildren()){
+                    //get each client
+                    Client client = postSnapShot.getValue(Client.class);
+                    //add updated client to list
+                    clients.add(client);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                final String TAG = "Couldn't fetch list of clients";
+                Log.w(TAG, "loadPost:onCancelled", error.toException());
+            }
+        });
+
     }
 
 
@@ -190,11 +228,21 @@ public class ClientRegisterScreen extends AppCompatActivity {
         EditText clientUnitNumber = (EditText)findViewById(R.id.clientUnitNumber);
 
         clientAddress.setUnit(clientUnitNumber.getText().toString());
-
+        clientAddress.setPostalCode("ABC 123");
+        client.setClientAddress(clientAddress);
+        client.setUserType("Client");
         if(firstNameValid && lastNameValid && emailValid && passwordValid && passwordsMatch && cardNumberValid && cardCVCValid && cardExpirationDateMonthValid && cardExpirationDateYearValid && cardHolderNameValid && countryValid && provinceValid && cityValid && streetNameValid && streetNumberValid) {
             System.out.println("All fields valid");
+            postNewClient(client);
+            Intent i = new Intent(this, MainActivity.class);
+            startActivity(i);
         }
 
+    }
+
+    public void postNewClient(Client newClient){
+        String userId = dbRef.push().getKey();
+        dbRef.child("clients").child(userId).setValue(newClient);
     }
 
 
