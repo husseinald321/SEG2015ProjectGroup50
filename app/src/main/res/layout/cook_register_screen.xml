@@ -1,9 +1,329 @@
 <?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/buttoncookRegister"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".CookRegisterScreen">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/cookFirstNameText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="First Name" />
+
+            <EditText
+                android:id="@+id/cookFirstName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Enter first name"
+                android:inputType="textPersonName" />
+
+            <TextView
+                android:id="@+id/cookFirstNameInvalid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Please enter your first name."
+                android:textColor="#F44336"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/cookLastNameText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Last Name" />
+
+            <EditText
+                android:id="@+id/cookLastName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Enter last name"
+                android:inputType="textPersonName" />
+
+            <TextView
+                android:id="@+id/cookLastNameInvalid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Please enter your last name."
+                android:textColor="#F44336"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/cookEmailText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Email" />
+
+            <EditText
+                android:id="@+id/cookEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Enter email"
+                android:inputType="textEmailAddress" />
+
+            <TextView
+                android:id="@+id/cookEmailInvalid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Please enter a valid email."
+                android:textColor="#F44336"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/cookPasswordText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Password" />
+
+            <EditText
+                android:id="@+id/cookPassword1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Enter password"
+                android:inputType="textPersonName" />
+
+            <LinearLayout
+                android:id="@+id/cookPasswordInvalid"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/cookPasswordInvalid0"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#F44336"
+                    tools:text="Please enter a valid password." />
+
+                <TextView
+                    android:id="@+id/cookPasswordInvalid1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Password must contain at least one digit [0-9]."
+                    android:textColor="#F44336" />
+
+                <TextView
+                    android:id="@+id/cookPasswordInvalid2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Password must contain at least one lowercase letter [a-z]."
+                    android:textColor="#F44336" />
+
+                <TextView
+                    android:id="@+id/cookPasswordInvalid3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Password must contain at least one uppercase letter [A-Z]."
+                    android:textColor="#F44336" />
+
+                <TextView
+                    android:id="@+id/cookPasswordInvalid4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Password must contain a length of at least 8 characters and a maximum of 20 characters. "
+                    android:textColor="#F44336" />
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/cookPassword2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Reenter password"
+                android:inputType="textPersonName" />
+
+            <TextView
+                android:id="@+id/cookPasswordNoMatch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Your passwords do not match."
+                android:textColor="#F44336"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/cookCountryText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Country" />
+
+            <EditText
+                android:id="@+id/cookCountry"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Enter country name"
+                android:inputType="textPersonName" />
+
+            <TextView
+                android:id="@+id/cookCountryInvalid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Please enter a country."
+                android:textColor="#F44336"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/cookProvinceText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Province/State" />
+
+            <EditText
+                android:id="@+id/cookProvince"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Enter province/state"
+                android:inputType="textPersonName" />
+
+            <TextView
+                android:id="@+id/cookProvinceInvalid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Please enter a province or state."
+                android:textColor="#F44336"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/cookCityText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="City" />
+
+            <EditText
+                android:id="@+id/cookCity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Enter City"
+                android:inputType="textPersonName" />
+
+            <TextView
+                android:id="@+id/cookCityInvalid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Please enter a city."
+                android:textColor="#F44336"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/cookStreetNameText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Street Name" />
+
+            <EditText
+                android:id="@+id/cookStreetName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Enter Street Name"
+                android:inputType="textPersonName" />
+
+            <TextView
+                android:id="@+id/cookStreetNameInvalid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Please enter a street name."
+                android:textColor="#F44336"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/cookStreetNumberText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Street Number" />
+
+            <EditText
+                android:id="@+id/cookStreetNumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Enter street number"
+                android:inputType="number" />
+
+            <TextView
+                android:id="@+id/cookStreetNumberInvalid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Please enter a street number."
+                android:textColor="#F44336"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/cookUnitNumberText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Unit Number" />
+
+            <EditText
+                android:id="@+id/cookUnitNumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Enter Unit Number (if applicable)"
+                android:inputType="number" />
+
+            <TextView
+                android:id="@+id/voidChequeText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="TextView" />
+
+            <ImageView
+                android:id="@+id/voidChequeImage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:srcCompat="@tools:sample/avatars" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/buttonCookTakePhoto"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Take Photo" />
+
+                <Button
+                    android:id="@+id/buttonCookUploadFromGallery"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="Add from Gallery" />
+            </LinearLayout>
+            <Button
+                android:id="@+id/button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="registerComplete"
+                android:text="Complete Registration"
+                tools:layout_editor_absoluteY="932dp" />
+        </LinearLayout>
+
+    </ScrollView>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
