@@ -3,9 +3,22 @@ package com.example.mytable;
 import android.provider.Telephony;
 
 public class Cook extends User{
-    String voidChequeFileName, cookDescription;
-    int mealsSold, cookRating;
-    Address cookAddress;
+    private String voidChequeFileName, cookDescription;
+    private int mealsSold, cookRating;
+    private Address cookAddress;
+
+    public Cook() {
+        this.userType = "Cook";
+    }
+
+    public Cook(String voidChequeFileName, String cookDescription, int mealsSold, int cookRating, Address cookAddress) {
+        this.voidChequeFileName = voidChequeFileName;
+        this.cookDescription = cookDescription;
+        this.mealsSold = mealsSold;
+        this.cookRating = cookRating;
+        this.cookAddress = cookAddress;
+        this.userType = "Cook";
+    }
 
     public String getVoidChequeFileName() {
         return voidChequeFileName;

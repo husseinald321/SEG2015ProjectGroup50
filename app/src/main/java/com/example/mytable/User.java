@@ -3,8 +3,8 @@ import java.time.LocalDate;
 import java.util.regex.*;
 
 public class User {
-    private String email, password, firstName, lastName, userType;
-    private boolean loginStatus;
+    protected String email, password, firstName, lastName, userType;
+    protected boolean loginStatus;
 
 
     public User() { // default constructor

@@ -28,11 +28,11 @@ import java.util.List;
 
 public class CookRegisterScreen extends AppCompatActivity {
 
-    Cook cook;
-    Address cookAddress;
-    FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference dbRef = database.getReference("users");
-    List<Cook> cooks = new ArrayList<Cook>();
+    private Cook cook;
+    private Address cookAddress;
+    private FirebaseDatabase database = FirebaseDatabase.getInstance();
+    private DatabaseReference dbRef = database.getReference("users");
+    private List<Cook> cooks = new ArrayList<Cook>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

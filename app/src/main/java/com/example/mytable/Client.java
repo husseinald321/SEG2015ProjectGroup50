@@ -7,8 +7,18 @@ public class Client extends User{
     private String cardHolderName, cardExpirationDateMonth, cardExpirationDateYear, cardExpirationDate;
 
     public Client() {
-
+        this.userType = "Client";
     }
+
+    public Client(Address clientAddress, int cardCVC, long cardNumber, String cardHolderName, String cardExpirationDate) {
+        this.clientAddress = clientAddress;
+        this.cardCVC = cardCVC;
+        this.cardNumber = cardNumber;
+        this.cardHolderName = cardHolderName;
+        this.cardExpirationDate = cardExpirationDate;
+        this.userType = "Client";
+    }
+
     public Address getClientAddress() {
         return clientAddress;
     }

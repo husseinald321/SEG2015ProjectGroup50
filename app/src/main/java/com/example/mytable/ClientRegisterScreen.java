@@ -23,11 +23,11 @@ import java.util.List;
 
 public class ClientRegisterScreen extends AppCompatActivity {
 
-    Client client;
-    Address clientAddress;
-    FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference dbRef = database.getReference("users");
-    List<Client> clients = new ArrayList<Client>();
+    private Client client;
+    private Address clientAddress;
+    private FirebaseDatabase database = FirebaseDatabase.getInstance();
+    private DatabaseReference dbRef = database.getReference("users");
+    private List<Client> clients = new ArrayList<Client>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -242,7 +242,7 @@ public class ClientRegisterScreen extends AppCompatActivity {
 
     public void postNewClient(Client newClient){
         String userId = dbRef.push().getKey();
-        dbRef.child("clients").child(userId).setValue(newClient);
+        dbRef.child(userId).setValue(newClient);
     }
 
 

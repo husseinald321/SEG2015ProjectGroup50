@@ -10,6 +10,28 @@ public class Address { // represents an Address and contains street, street numb
 
     }
 
+    public Address(String street, String postalCode, String city, String province, String country, int number, int unit) {
+        this.street = street;
+        this.postalCode = postalCode;
+        this.city = city;
+        this.province = province;
+        this.country = country;
+        this.number = number;
+        this.unit = unit;
+    }
+
+    public Address(String street, String postalCode, String city, String province, String country, int number) {
+        this.street = street;
+        this.postalCode = postalCode;
+        this.city = city;
+        this.province = province;
+        this.country = country;
+        this.number = number;
+        this.unit = 0;
+    }
+
+
+
     public String getStreet() {
         return street;
     }
