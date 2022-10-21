@@ -43,13 +43,13 @@ public class ClientRegisterScreen extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 //Clearing previously stored list of clients.
-                clients.clear();
-                for (DataSnapshot postSnapShot : snapshot.getChildren()){
-                    //get each client
-                    Client client = postSnapShot.getValue(Client.class);
-                    //add updated client to list
-                    clients.add(client);
-                }
+//                clients.clear();
+//                for (DataSnapshot postSnapShot : snapshot.getChildren()){
+//                    //get each client
+//                    Client client = postSnapShot.getValue(Client.class);
+//                    //add updated client to list
+//                    clients.add(client);
+//                }
             }
 
             @Override
@@ -241,8 +241,8 @@ public class ClientRegisterScreen extends AppCompatActivity {
         clientAddress.setUnit(clientUnitNumber.getText().toString());
         clientAddress.setPostalCode("ABC 123");
         client.setClientAddress(clientAddress);
+        // only creates account if all fields are valid
         if(firstNameValid && lastNameValid && emailValid && passwordValid && passwordsMatch && cardNumberValid && cardCVCValid && cardExpirationDateMonthValid && cardExpirationDateYearValid && cardHolderNameValid && countryValid && provinceValid && cityValid && streetNameValid && clientPostalCodeValid && streetNumberValid) {
-            System.out.println("All fields valid");
             postNewClient(client);
             Intent i = new Intent(this, MainActivity.class);
             startActivity(i);

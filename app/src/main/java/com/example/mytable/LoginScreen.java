@@ -68,7 +68,7 @@ public class LoginScreen extends AppCompatActivity {
 
         if(users.containsKey(email)) {
             String id = users.get(email);
-            id.toLowerCase();
+            email.toLowerCase();
             String dbPassword = dbSnapshot.child(id).child("password").getValue(String.class);
             if(dbPassword.equals(password)) {
                 failedLogin.setVisibility(failedLogin.GONE);

@@ -87,13 +87,13 @@ public class CookRegisterScreen extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 100 && data != null) {
+        if (requestCode == 100 && data != null) { // sets image to photo taken
             Bitmap captureImage = (Bitmap) data.getExtras().get("data");
             voidChequeImage.setImageBitmap(captureImage);
 
         }
 
-        if (requestCode == 200 && data != null) {
+        if (requestCode == 200 && data != null) { // sets image to photo imported
             Uri selectedImage = data.getData();
             voidChequeImage.setImageURI(selectedImage);
         }
@@ -102,7 +102,7 @@ public class CookRegisterScreen extends AppCompatActivity {
     public void registerComplete(View v) {
         EditText cookFirstName = (EditText)findViewById(R.id.cookFirstName);
         TextView cookFirstNameInvalid = (TextView)findViewById(R.id.cookFirstNameInvalid);
-        boolean firstNameValid = cook.setFirstName(cookFirstName.getText().toString());
+        boolean firstNameValid = cook.setFirstName(cookFirstName.getText().toString()); // validates first name
 
         if (!firstNameValid) {
 
@@ -114,7 +114,7 @@ public class CookRegisterScreen extends AppCompatActivity {
 
         EditText cookLastName = (EditText)findViewById(R.id.cookLastName);
         TextView cookLastNameInvalid = (TextView)findViewById(R.id.cookLastNameInvalid);
-        boolean lastNameValid = cook.setLastName(cookLastName.getText().toString());
+        boolean lastNameValid = cook.setLastName(cookLastName.getText().toString()); // validates last name
 
         if (!lastNameValid) {
 
@@ -126,7 +126,7 @@ public class CookRegisterScreen extends AppCompatActivity {
 
         EditText cookEmail = (EditText)findViewById(R.id.cookEmail);
         TextView cookEmailInvalid = (TextView)findViewById(R.id.cookEmailInvalid);
-        boolean emailValid = cook.setEmail(cookEmail.getText().toString().toLowerCase());
+        boolean emailValid = cook.setEmail(cookEmail.getText().toString().toLowerCase()); // validates email
 
         if (!emailValid) {
 
@@ -141,8 +141,8 @@ public class CookRegisterScreen extends AppCompatActivity {
         LinearLayout cookPasswordInvalid = (LinearLayout)findViewById(R.id.cookPasswordInvalid);
         TextView cookPasswordNoMatch = (TextView)findViewById(R.id.cookPasswordNoMatch);
 
-        boolean passwordValid = cook.setPassword(cookPassword1.getText().toString());
-        boolean passwordsMatch = cookPassword1.getText().toString().equals(cookPassword2.getText().toString());
+        boolean passwordValid = cook.setPassword(cookPassword1.getText().toString()); // validates password strength
+        boolean passwordsMatch = cookPassword1.getText().toString().equals(cookPassword2.getText().toString()); // validates password match
 
         if (!passwordValid) {
 
@@ -162,7 +162,7 @@ public class CookRegisterScreen extends AppCompatActivity {
         EditText cookCountry = (EditText)findViewById(R.id.cookCountry);
         TextView cookCountryInvalid = (TextView)findViewById(R.id.cookCountryInvalid);
 
-        boolean countryValid = cookAddress.setCountry(cookCountry.getText().toString());
+        boolean countryValid = cookAddress.setCountry(cookCountry.getText().toString()); // validates country name
 
         if (!countryValid) {
             cookCountryInvalid.setVisibility(cookCountryInvalid.VISIBLE);
@@ -173,7 +173,7 @@ public class CookRegisterScreen extends AppCompatActivity {
         EditText cookProvince = (EditText)findViewById(R.id.cookProvince);
         TextView cookProvinceInvalid = (TextView)findViewById(R.id.cookProvinceInvalid);
 
-        boolean provinceValid = cookAddress.setProvince(cookProvince.getText().toString());
+        boolean provinceValid = cookAddress.setProvince(cookProvince.getText().toString()); // validates province or state name
 
         if (!provinceValid) {
             cookProvinceInvalid.setVisibility(cookProvinceInvalid.VISIBLE);
@@ -184,7 +184,7 @@ public class CookRegisterScreen extends AppCompatActivity {
         EditText cookCity = (EditText)findViewById(R.id.cookCity);
         TextView cookCityInvalid = (TextView)findViewById(R.id.cookCityInvalid);
 
-        boolean cityValid = cookAddress.setCity(cookCity.getText().toString());
+        boolean cityValid = cookAddress.setCity(cookCity.getText().toString()); // validates city name
 
         if (!cityValid) {
             cookCityInvalid.setVisibility(cookCityInvalid.VISIBLE);
@@ -195,7 +195,7 @@ public class CookRegisterScreen extends AppCompatActivity {
         EditText cookStreetName = (EditText)findViewById(R.id.cookStreetName);
         TextView cookStreetNameInvalid = (TextView)findViewById(R.id.cookStreetNameInvalid);
 
-        boolean streetNameValid = cookAddress.setStreet(cookStreetName.getText().toString());
+        boolean streetNameValid = cookAddress.setStreet(cookStreetName.getText().toString()); // validates street name
 
         if (!streetNameValid) {
             cookStreetNameInvalid.setVisibility(cookStreetNameInvalid.VISIBLE);
@@ -206,7 +206,7 @@ public class CookRegisterScreen extends AppCompatActivity {
         EditText cookStreetNumber = (EditText)findViewById(R.id.cookStreetNumber);
         TextView cookStreetNumberInvalid = (TextView)findViewById(R.id.cookStreetNumberInvalid);
 
-        boolean streetNumberValid = cookAddress.setNumber(cookStreetNumber.getText().toString());
+        boolean streetNumberValid = cookAddress.setNumber(cookStreetNumber.getText().toString()); // validates street number
 
         if (!streetNumberValid) {
             cookStreetNumberInvalid.setVisibility(cookStreetNumberInvalid.VISIBLE);
@@ -217,7 +217,7 @@ public class CookRegisterScreen extends AppCompatActivity {
         EditText cookPostalCode = (EditText)findViewById(R.id.cookPostalCode);
         TextView cookPostalCodeInvalid = (TextView)findViewById(R.id.cookPostalCodeInvalid);
 
-        boolean cookPostalCodeValid = cookAddress.setPostalCode(cookPostalCode.getText().toString());
+        boolean cookPostalCodeValid = cookAddress.setPostalCode(cookPostalCode.getText().toString()); // validates postal code
 
         if (!cookPostalCodeValid) {
             cookStreetNumberInvalid.setVisibility(cookPostalCodeInvalid.VISIBLE);
@@ -240,7 +240,7 @@ public class CookRegisterScreen extends AppCompatActivity {
 
     }
 
-    public void postNewCook(Cook newCook){
+    public void postNewCook(Cook newCook){ // uploads
         String userId = dbRef.push().getKey();
         dbRef.child(userId).setValue(newCook);
 //        voidChequeImage.setDrawingCacheEnabled(true);

@@ -276,8 +276,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="Enter postal code"
-                android:maxLength="6" />
+                android:hint="Enter postal code" />
 
             <TextView
                 android:id="@+id/cookPostalCodeInvalid"
