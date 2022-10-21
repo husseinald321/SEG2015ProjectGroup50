@@ -54,7 +54,7 @@ public class ClientRegisterScreen extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                final String TAG = "Couldn't fetch list of clients";
+                final String TAG = "Couldn't reach DB";
                 Log.w(TAG, "loadPost:onCancelled", error.toException());
             }
         });
@@ -89,7 +89,7 @@ public class ClientRegisterScreen extends AppCompatActivity {
 
         EditText clientEmail = (EditText)findViewById(R.id.clientEmail);
         TextView clientEmailInvalid = (TextView)findViewById(R.id.clientEmailInvalid);
-        boolean emailValid = client.setEmail(clientEmail.getText().toString());
+        boolean emailValid = client.setEmail(clientEmail.getText().toString().toLowerCase());
 
         if (!emailValid) {
 
