@@ -1,10 +1,16 @@
 package com.example.mytable;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -12,16 +18,22 @@ import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.lang.ref.Reference;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -32,14 +44,20 @@ public class CookRegisterScreen extends AppCompatActivity {
     private Address cookAddress;
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
     private DatabaseReference dbRef = database.getReference("users");
+    private DatabaseReference images = database.getReference("images");
+    ImageView voidChequeImage;
+
     private List<Cook> cooks = new ArrayList<Cook>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.cook_register_screen);
         cook = new Cook();
         cookAddress = new Address();
+        voidChequeImage = (ImageView) findViewById(R.id.voidChequeImage);
     }
 
     public void onStart() {
@@ -59,11 +77,26 @@ public class CookRegisterScreen extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                final String TAG = "Couldn't fetch list of cooks";
+                final String TAG = "Error:fetchlistofcooks";
                 Log.w(TAG, "loadPost:onCancelled", error.toException());
             }
         });
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 100 && data != null) {
+            Bitmap captureImage = (Bitmap) data.getExtras().get("data");
+            voidChequeImage.setImageBitmap(captureImage);
+
+        }
+
+        if (requestCode == 200 && data != null) {
+            Uri selectedImage = data.getData();
+            voidChequeImage.setImageURI(selectedImage);
+        }
     }
 
     public void registerComplete(View v) {
@@ -198,8 +231,37 @@ public class CookRegisterScreen extends AppCompatActivity {
 
     public void postNewCook(Cook newCook){
         String userId = dbRef.push().getKey();
-        dbRef.child("cooks").child(userId).setValue(newCook);
+        dbRef.child(userId).setValue(newCook);
+//        voidChequeImage.setDrawingCacheEnabled(true);
+//        voidChequeImage.buildDrawingCache();
+//        Bitmap bitmap = ((BitmapDrawable) voidChequeImage.getDrawable()).getBitmap();
+//        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+//        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+//        byte[] data = baos.toByteArray();
+//
+//        Task uploadTask = images.;
     }
+
+    public void takePhoto(View v) {
+        if (ContextCompat.checkSelfPermission(CookRegisterScreen.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(CookRegisterScreen.this, new String[]{
+                    Manifest.permission.CAMERA
+            },
+                    100);
+        }
+        
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(intent, 100);
+    }
+
+    public void importPhoto(View v) {
+        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        startActivityForResult(intent, 200);
+
+
+
+    }
+
 
 
 }
