@@ -59,7 +59,7 @@ public class CookRegisterScreen extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                final String TAG = "Couldn't fetch list of cooks";
+                final String TAG = "Couldn't reach DB";
                 Log.w(TAG, "loadPost:onCancelled", error.toException());
             }
         });
@@ -93,7 +93,7 @@ public class CookRegisterScreen extends AppCompatActivity {
 
         EditText cookEmail = (EditText)findViewById(R.id.cookEmail);
         TextView cookEmailInvalid = (TextView)findViewById(R.id.cookEmailInvalid);
-        boolean emailValid = cook.setEmail(cookEmail.getText().toString());
+        boolean emailValid = cook.setEmail(cookEmail.getText().toString().toLowerCase());
 
         if (!emailValid) {
 
