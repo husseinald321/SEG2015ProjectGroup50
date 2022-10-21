@@ -126,7 +126,7 @@ public class CookRegisterScreen extends AppCompatActivity {
 
         EditText cookEmail = (EditText)findViewById(R.id.cookEmail);
         TextView cookEmailInvalid = (TextView)findViewById(R.id.cookEmailInvalid);
-        boolean emailValid = cook.setEmail(cookEmail.getText().toString());
+        boolean emailValid = cook.setEmail(cookEmail.getText().toString().toLowerCase());
 
         if (!emailValid) {
 
