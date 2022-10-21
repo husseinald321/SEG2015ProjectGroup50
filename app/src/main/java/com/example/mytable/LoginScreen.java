@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -40,13 +41,9 @@ public class LoginScreen extends AppCompatActivity {
                 users = new HashMap<String,String>();
                 Iterable<DataSnapshot> usersIterable = snapshot.getChildren();
                 for(DataSnapshot PostSnapshot : usersIterable) {
-
                     String id = PostSnapshot.getKey();
-
                     String email = PostSnapshot.child("email").getValue(String.class);
-
                     users.put(email, id);
-
                 }
 
             }
@@ -63,22 +60,26 @@ public class LoginScreen extends AppCompatActivity {
     public void attemptLogin(View v){
         EditText userEmail = (EditText)findViewById(R.id.userEmail);
         EditText userPassword = (EditText)findViewById(R.id.userPassword);
+        TextView successfulLogin = (TextView)findViewById(R.id.successLogin);
+        TextView failedLogin = (TextView)findViewById(R.id.failedLogin);
+
         String email = userEmail.getText().toString();
         String password = userPassword.getText().toString();
 
-        System.out.println(email);
-        System.out.println(password);
         if(users.containsKey(email)) {
             String id = users.get(email);
             String dbPassword = dbSnapshot.child(id).child("password").getValue(String.class);
             if(dbPassword.equals(password)) {
-
+                failedLogin.setVisibility(failedLogin.GONE);
+                successfulLogin.setVisibility(successfulLogin.VISIBLE);
                 dbRef.child(id).child("loginStatus").setValue(true);
 
                 Intent i = new Intent(this, LoggedInScreen.class);
                 i.putExtra("id", id);
                 startActivity(i);
             }
+        } else{
+            failedLogin.setVisibility(failedLogin.VISIBLE);
         }
 
     }
