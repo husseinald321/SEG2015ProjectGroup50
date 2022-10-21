@@ -65,12 +65,12 @@ public class CookRegisterScreen extends AppCompatActivity {
         dbRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                //Clearing previously stored list of clients.
+                //Clearing previously stored list of cooks.
                 cooks.clear();
                 for (DataSnapshot postSnapShot : snapshot.getChildren()){
-                    //get each client
+                    //get each cook
                     Cook cook = postSnapShot.getValue(Cook.class);
-                    //add updated client to list
+                    //add updated cook to list
                     cooks.add(cook);
                 }
             }
@@ -214,6 +214,17 @@ public class CookRegisterScreen extends AppCompatActivity {
             cookStreetNumberInvalid.setVisibility(cookStreetNumberInvalid.GONE);
         }
 
+        EditText cookPostalCode = (EditText)findViewById(R.id.cookPostalCode);
+        TextView cookPostalCodeInvalid = (TextView)findViewById(R.id.cookPostalCodeInvalid);
+
+        boolean cookPostalCodeValid = cookAddress.setPostalCode(cookPostalCode.getText().toString());
+
+        if (!cookPostalCodeValid) {
+            cookStreetNumberInvalid.setVisibility(cookPostalCodeInvalid.VISIBLE);
+        } else {
+            cookStreetNumberInvalid.setVisibility(cookPostalCodeInvalid.GONE);
+        }
+        
         EditText cookUnitNumber = (EditText)findViewById(R.id.cookUnitNumber);
 
         cookAddress.setUnit(cookUnitNumber.getText().toString());

@@ -225,13 +225,23 @@ public class ClientRegisterScreen extends AppCompatActivity {
             clientStreetNumberInvalid.setVisibility(clientStreetNumberInvalid.GONE);
         }
 
+        EditText clientPostalCode = (EditText)findViewById(R.id.clientPostalCode);
+        TextView clientPostalCodeInvalid = (TextView)findViewById(R.id.clientPostalCodeInvalid);
+
+        boolean clientPostalCodeValid = clientAddress.setPostalCode(clientPostalCode.getText().toString());
+
+        if (!clientPostalCodeValid) {
+            clientStreetNumberInvalid.setVisibility(clientPostalCodeInvalid.VISIBLE);
+        } else {
+            clientStreetNumberInvalid.setVisibility(clientPostalCodeInvalid.GONE);
+        }
+
         EditText clientUnitNumber = (EditText)findViewById(R.id.clientUnitNumber);
 
         clientAddress.setUnit(clientUnitNumber.getText().toString());
         clientAddress.setPostalCode("ABC 123");
         client.setClientAddress(clientAddress);
-        client.setUserType("Client");
-        if(firstNameValid && lastNameValid && emailValid && passwordValid && passwordsMatch && cardNumberValid && cardCVCValid && cardExpirationDateMonthValid && cardExpirationDateYearValid && cardHolderNameValid && countryValid && provinceValid && cityValid && streetNameValid && streetNumberValid) {
+        if(firstNameValid && lastNameValid && emailValid && passwordValid && passwordsMatch && cardNumberValid && cardCVCValid && cardExpirationDateMonthValid && cardExpirationDateYearValid && cardHolderNameValid && countryValid && provinceValid && cityValid && streetNameValid && clientPostalCodeValid && streetNumberValid) {
             System.out.println("All fields valid");
             postNewClient(client);
             Intent i = new Intent(this, MainActivity.class);

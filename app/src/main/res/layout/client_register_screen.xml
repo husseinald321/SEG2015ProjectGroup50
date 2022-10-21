@@ -389,6 +389,27 @@
                 android:text="Please enter a street number."
                 android:textColor="#F44336"
                 android:visibility="gone" />
+            <TextView
+                android:id="@+id/clientPostalCodeText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Postal Code" />
+
+            <EditText
+                android:id="@+id/clientPostalCode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Enter postal code"
+                android:maxLength="6" />
+
+            <TextView
+                android:id="@+id/clientPostalCodeInvalid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Please enter a postal code."
+                android:textColor="#F44336"
+                android:visibility="gone" />
 
             <TextView
                 android:id="@+id/clientUnitNumberText"
