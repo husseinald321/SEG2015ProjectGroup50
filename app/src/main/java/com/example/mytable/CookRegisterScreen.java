@@ -220,9 +220,10 @@ public class CookRegisterScreen extends AppCompatActivity {
         boolean cookPostalCodeValid = cookAddress.setPostalCode(cookPostalCode.getText().toString()); // validates postal code
 
         if (!cookPostalCodeValid) {
-            cookStreetNumberInvalid.setVisibility(cookPostalCodeInvalid.VISIBLE);
+            cookPostalCodeInvalid.setVisibility(cookPostalCodeInvalid.VISIBLE);
         } else {
-            cookStreetNumberInvalid.setVisibility(cookPostalCodeInvalid.GONE);
+            System.out.println("postal code valid");
+            cookPostalCodeInvalid.setVisibility(cookPostalCodeInvalid.GONE);
         }
         
         EditText cookUnitNumber = (EditText)findViewById(R.id.cookUnitNumber);
